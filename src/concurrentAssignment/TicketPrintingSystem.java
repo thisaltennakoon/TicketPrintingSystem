@@ -1,7 +1,7 @@
-package concurrent.assignment;
+package concurrentAssignment;
 
-import concurrent.assignment.Technician.TicketPaperTechnician;
-import concurrent.assignment.Technician.TicketTonerTechnician;
+import concurrentAssignment.Technician.TicketPaperTechnician;
+import concurrentAssignment.Technician.TicketTonerTechnician;
 
 public class TicketPrintingSystem {
 

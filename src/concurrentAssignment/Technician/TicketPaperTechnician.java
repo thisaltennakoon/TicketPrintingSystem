@@ -1,7 +1,7 @@
-package concurrent.assignment.Technician;
+package concurrentAssignment.Technician;
 
-import concurrent.assignment.ServiceTicketMachine;
-import concurrent.assignment.TicketMachine;
+import concurrentAssignment.ServiceTicketMachine;
+import concurrentAssignment.TicketMachine;
 
 import java.util.Random;
 

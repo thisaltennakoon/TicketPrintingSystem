@@ -1,6 +1,6 @@
-package concurrent.assignment.Technician;
+package concurrentAssignment.Technician;
 
-import concurrent.assignment.ServiceTicketMachine;
+import concurrentAssignment.ServiceTicketMachine;
 
 public abstract class Technician {
 

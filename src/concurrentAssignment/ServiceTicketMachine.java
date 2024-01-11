@@ -1,4 +1,4 @@
-package concurrent.assignment;
+package concurrentAssignment;
 
 public interface ServiceTicketMachine {
 

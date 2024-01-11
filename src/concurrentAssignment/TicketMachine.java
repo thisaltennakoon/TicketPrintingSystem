@@ -1,4 +1,4 @@
-package concurrent.assignment;
+package concurrentAssignment;
 
 import java.util.Random;
 import java.util.concurrent.locks.Condition;
