@@ -1,42 +1,27 @@
 package iit.level6.concurrent.assignment;
 
-import iit.level6.concurrent.assignment.PassengerInfo.PassengerInfo;
 import iit.level6.concurrent.assignment.Technician.TicketPaperTechnician;
 import iit.level6.concurrent.assignment.Technician.TicketTonerTechnician;
-import iit.level6.concurrent.assignment.TicketInfo.Ticket;
-import iit.level6.concurrent.assignment.TravelInfo.TravelInfo;
-
-import java.math.BigDecimal;
 
 public class TicketPrintingSystem {
 
     public static void main(String[] args) {
-
-//        PassengerInfo passengerInfo1 = new PassengerInfo("Peter", "0112345678", "peter@gmail.com");
-//        PassengerInfo passengerInfo2 = new PassengerInfo("John", "0711212122", "john@gmail.com");
-//        PassengerInfo passengerInfo3 = new PassengerInfo("Mary", "0771234567", "mary@gmail.com");
-//        PassengerInfo passengerInfo4 = new PassengerInfo("Jane", "0774234243", "jane@gmial.com");
-//
-//        TravelInfo travelInfo1 = new TravelInfo("Colombo", "Kandy");
-//        TravelInfo travelInfo2 = new TravelInfo("Kandy", "Galle");
-//        TravelInfo travelInfo3 = new TravelInfo("Galle", "Matara");
-//        TravelInfo travelInfo4 = new TravelInfo("Matara", "Colombo");
 
 //        Ticket ticket1 = new Ticket(1001,  1000, passengerInfo1, travelInfo1);
 //        Ticket ticket2 = new Ticket(1002,  2000, passengerInfo2, travelInfo2);
 //        Ticket ticket3 = new Ticket(1003,  3000, passengerInfo3, travelInfo3);
 //        Ticket ticket4 = new Ticket(1004,  4000, passengerInfo4, travelInfo4);
 
-        TicketMachine ticketMachine = new TicketMachine(" TicketMachine Name",1, 2);
+        TicketMachine ticketMachine = new TicketMachine(" TicketMachine Name", 1, 2);
 
         Passenger passenger1 = new Passenger(ticketMachine, "passenger1", "01122334455",
-                "passenger1@iit.com");
+                "passenger1@iit.com", "arrivalLocation1", "departureLocation1");
         Passenger passenger2 = new Passenger(ticketMachine, "passenger2", "01122334451",
-                "passenger2@iit.com");
+                "passenger2@iit.com", "arrivalLocation2", "departureLocation2");
         Passenger passenger3 = new Passenger(ticketMachine, "passenger3", "01122334452",
-                "passenger3@iit.com");
+                "passenger3@iit.com", "arrivalLocation3", "departureLocation3");
         Passenger passenger4 = new Passenger(ticketMachine, "passenger4", "01122334453",
-                "passenger4@iit.com");
+                "passenger4@iit.com", "arrivalLocation4", "departureLocation4");
 
         TicketTonerTechnician ticketTonerTechnician = new TicketTonerTechnician("Toner Technician", ticketMachine);
         TicketPaperTechnician ticketPaperTechnician = new TicketPaperTechnician("Paper Technician", ticketMachine);
@@ -75,5 +60,76 @@ public class TicketPrintingSystem {
 //            }
         }
 
+    }
+
+    public static class Ticket {
+
+        private final Integer ticketNumber;
+        private final float ticketPrice;
+        private final String passengerName;
+        private String phoneNumber;
+        private String emailAddress;
+        private final String arrivalLocation;
+        private final String departureLocation;
+
+        public Ticket(int ticketNUmber, float ticketPrice, String passengerName, String phoneNumber, String emailAddress,
+                      String arrivalLocation, String departureLocation) {
+            this.ticketNumber = ticketNUmber;
+            this.ticketPrice = ticketPrice;
+            this.passengerName = passengerName;
+            this.phoneNumber = phoneNumber;
+            this.emailAddress = emailAddress;
+            this.arrivalLocation = arrivalLocation;
+            this.departureLocation = departureLocation;
+        }
+
+        public Integer getTicketNumber() {
+            return ticketNumber;
+        }
+
+        public float getTicketPrice() {
+            return ticketPrice;
+        }
+
+        public String getPassengerName() {
+            return passengerName;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+        public String getEmailAddress() {
+            return emailAddress;
+        }
+
+        public void setEmailAddress(String emailAddress) {
+            this.emailAddress = emailAddress;
+        }
+
+        public String getArrivalLocation() {
+            return arrivalLocation;
+        }
+
+        public String getDepartureLocation() {
+            return departureLocation;
+        }
+
+        @Override
+        public String toString() {
+            return "Ticket{" +
+                    "ticketNUmber=" + ticketNumber +
+                    ", ticketPrice=" + ticketPrice +
+                    ", passengerName='" + passengerName + '\'' +
+                    ", phoneNumber='" + phoneNumber + '\'' +
+                    ", emailAddress='" + emailAddress + '\'' +
+                    ", arrivalLocation='" + arrivalLocation + '\'' +
+                    ", departureLocation='" + departureLocation + '\'' +
+                    '}';
+        }
     }
 }

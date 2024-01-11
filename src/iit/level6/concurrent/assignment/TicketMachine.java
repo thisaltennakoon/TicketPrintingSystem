@@ -1,9 +1,5 @@
 package iit.level6.concurrent.assignment;
 
-import iit.level6.concurrent.assignment.PassengerInfo.PassengerInfo;
-import iit.level6.concurrent.assignment.TicketInfo.Ticket;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -35,20 +31,22 @@ public class TicketMachine implements ServiceTicketMachine {
         this.numberOfTicketsSold = 0;
     }
 
-    public Ticket getTicket(String passengerName, String phoneNumber, String emailAddress) {
-        Ticket ticket = purchaseTicket(passengerName, phoneNumber, emailAddress);
+    public TicketPrintingSystem.Ticket getTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
+                                                 String departureLocation) {
+        TicketPrintingSystem.Ticket ticket = purchaseTicket(passengerName, phoneNumber, emailAddress, arrivalLocation, departureLocation);
         printTicket(ticket);
         return ticket;
     }
 
     @Override
-    public Ticket purchaseTicket(String passengerName, String phoneNumber, String emailAddress) {
+    public TicketPrintingSystem.Ticket purchaseTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
+                                                      String departureLocation) {
         lock.lock();
         try {
-            Ticket ticket = new Ticket(numberOfTicketsSold + 1, 1000,
-                    new PassengerInfo(passengerName, phoneNumber, emailAddress), null);
+            TicketPrintingSystem.Ticket ticket = new TicketPrintingSystem.Ticket(numberOfTicketsSold + 1, 1000,
+                    passengerName, phoneNumber, emailAddress, arrivalLocation, departureLocation);
             numberOfTicketsSold++;
-            System.out.println("Ticket number: "+ ticket.getTicketNumber().toString()+" purchased..");
+            System.out.println("Ticket number: " + ticket.getTicketNumber().toString() + " purchased..");
             havePaperLevel.signalAll();
             haveTonerLevel.signalAll();
             return ticket;
@@ -60,17 +58,17 @@ public class TicketMachine implements ServiceTicketMachine {
     }
 
     @Override
-    public void printTicket(Ticket ticket) {
+    public void printTicket(TicketPrintingSystem.Ticket ticket) {
         lock.lock();
         try {
             while (!(currentPaperLevel > 0) || !(currentTonerLevel > ServiceTicketMachine.MINIMUM_TONER_LEVEL)) {
-                System.out.println("Passenger " + ticket.getPassengerInfo().getPassengerName() + " waiting for " +
+                System.out.println("Passenger " + ticket.getPassengerName() + " waiting for " +
                         "ticket machine " + ticketMachineName);
                 noResource.await();
             }
             currentPaperLevel--;
             currentTonerLevel--;
-            System.out.println("Ticket number: "+ ticket.getTicketNumber().toString()+" printed..");
+            System.out.println("Ticket number: " + ticket.getTicketNumber().toString() + " printed..");
             havePaperLevel.signalAll();
             haveTonerLevel.signalAll();
         } catch (InterruptedException e) {

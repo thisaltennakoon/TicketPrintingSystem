@@ -20,8 +20,8 @@ public class TicketPaperTechnician implements Runnable {
 
     @Override
     public void run() {
-        for(int i = 0; i < NUMBER_OF_RETRY; i++){
-            if(serviceTicketMachine.getPaperLevel() < ServiceTicketMachine.SHEETS_PER_PACK){
+        for (int i = 0; i < NUMBER_OF_RETRY; i++) {
+            if (serviceTicketMachine.getPaperLevel() < ServiceTicketMachine.SHEETS_PER_PACK) {
                 serviceTicketMachine.refillTicketPaper();
             }
             try {
