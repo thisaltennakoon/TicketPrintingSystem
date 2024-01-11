@@ -29,10 +29,10 @@ public class TicketPrintingSystem {
 
         TicketMachine ticketMachine = new TicketMachine(" TicketMachine Name",1, 2);
 
-        Passenger passenger1 = new Passenger(ticketMachine, ticket1);
-        Passenger passenger2 = new Passenger(ticketMachine, ticket2);
-        Passenger passenger3 = new Passenger(ticketMachine, ticket3);
-        Passenger passenger4 = new Passenger(ticketMachine, ticket4);
+        Passenger passenger1 = new Passenger(ticketMachine);
+        Passenger passenger2 = new Passenger(ticketMachine);
+        Passenger passenger3 = new Passenger(ticketMachine);
+        Passenger passenger4 = new Passenger(ticketMachine);
 
         TicketTonerTechnician ticketTonerTechnician = new TicketTonerTechnician("Toner Technician", ticketMachine);
         TicketPaperTechnician ticketPaperTechnician = new TicketPaperTechnician("Paper Technician", ticketMachine);

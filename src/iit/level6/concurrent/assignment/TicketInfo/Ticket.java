@@ -7,20 +7,20 @@ import java.math.BigDecimal;
 
 public class Ticket {
 
-    private final int ticketNUmber;
+    private final Integer ticketNumber;
     private final BigDecimal ticketPrice;
     private final PassengerInfo passengerInfo;
     private final TravelInfo travelInfo;
 
     public Ticket(int ticketNUmber, BigDecimal ticketPrice, PassengerInfo passengerInfo, TravelInfo travelInfo) {
-        this.ticketNUmber = ticketNUmber;
+        this.ticketNumber = ticketNUmber;
         this.ticketPrice = ticketPrice;
         this.passengerInfo = passengerInfo;
         this.travelInfo = travelInfo;
     }
 
-    public int getTicketNUmber() {
-        return ticketNUmber;
+    public Integer getTicketNumber() {
+        return ticketNumber;
     }
 
     public BigDecimal getTicketPrice() {
@@ -38,7 +38,7 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket{" +
-                "ticketNUmber=" + ticketNUmber +
+                "ticketNUmber=" + ticketNumber +
                 ", ticketPrice=" + ticketPrice +
                 ", passengerInfo=" + passengerInfo +
                 ", travelInfo=" + travelInfo +

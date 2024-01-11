@@ -12,7 +12,7 @@ public interface ServiceTicketMachine {
 
     void printTicket(Ticket ticket);
 
-    void purchasingTicket(Ticket ticket);
+    Ticket purchaseTicket();
 
     void replaceTonerCartridge();
 
