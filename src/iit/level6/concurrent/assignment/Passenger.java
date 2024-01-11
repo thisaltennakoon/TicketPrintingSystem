@@ -7,14 +7,19 @@ import java.util.Random;
 public class Passenger implements Runnable{
 
     private final TicketMachine machine;
+    private final String passengerName;
+    private String phoneNumber;
+    private String emailAddress;
 
     private Ticket ticket;
 
     Random random = new Random();
 
-    public Passenger(TicketMachine machine) {
+    public Passenger(TicketMachine machine, String passengerName, String phoneNumber, String emailAddress) {
         this.machine = machine;
-//        this.ticket = ticket;
+        this.passengerName = passengerName;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
     }
 
     @Override
@@ -22,7 +27,7 @@ public class Passenger implements Runnable{
 
 //        machine.purchasingTicket(this.ticket);
 //        machine.printTicket(this.ticket);
-        this.ticket = machine.getTicket();
+        this.ticket = machine.getTicket(this.passengerName, this.phoneNumber, this.emailAddress);
 //        System.out.println("Passenger " + this.ticket.getPassengerInfo().getPassengerName() + " got " + ticket);
         try{
             Thread.sleep(random.nextInt(1000) + 1000);

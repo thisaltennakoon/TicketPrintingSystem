@@ -12,7 +12,7 @@ public interface ServiceTicketMachine {
 
     void printTicket(Ticket ticket);
 
-    Ticket purchaseTicket();
+    Ticket purchaseTicket(String passengerName, String phoneNumber, String emailAddress);
 
     void replaceTonerCartridge();
 

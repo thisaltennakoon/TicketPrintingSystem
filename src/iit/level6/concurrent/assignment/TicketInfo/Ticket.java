@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 public class Ticket {
 
     private final Integer ticketNumber;
-    private final BigDecimal ticketPrice;
+    private final float ticketPrice;
     private final PassengerInfo passengerInfo;
     private final TravelInfo travelInfo;
 
-    public Ticket(int ticketNUmber, BigDecimal ticketPrice, PassengerInfo passengerInfo, TravelInfo travelInfo) {
+    public Ticket(int ticketNUmber, float ticketPrice, PassengerInfo passengerInfo, TravelInfo travelInfo) {
         this.ticketNumber = ticketNUmber;
         this.ticketPrice = ticketPrice;
         this.passengerInfo = passengerInfo;
@@ -23,7 +23,7 @@ public class Ticket {
         return ticketNumber;
     }
 
-    public BigDecimal getTicketPrice() {
+    public float getTicketPrice() {
         return ticketPrice;
     }
 
