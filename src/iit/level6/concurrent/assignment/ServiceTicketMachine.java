@@ -8,9 +8,9 @@ public interface ServiceTicketMachine {
     int FULL_TONER_LEVEL = 15;
     int MINIMUM_TONER_LEVEL = 10;
 
-    void printTicket(TicketPrintingSystem.Ticket ticket);
+    void printTicket(Ticket ticket);
 
-    TicketPrintingSystem.Ticket purchaseTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
+    Ticket purchaseTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
                                                String departureLocation);
 
     void replaceTonerCartridge();

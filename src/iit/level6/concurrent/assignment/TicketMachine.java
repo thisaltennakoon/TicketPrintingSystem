@@ -3,6 +3,7 @@ package iit.level6.concurrent.assignment;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
+import iit.level6.concurrent.assignment.Ticket;
 
 public class TicketMachine implements ServiceTicketMachine {
 
@@ -31,19 +32,19 @@ public class TicketMachine implements ServiceTicketMachine {
         this.numberOfTicketsSold = 0;
     }
 
-    public TicketPrintingSystem.Ticket getTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
+    public Ticket getTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
                                                  String departureLocation) {
-        TicketPrintingSystem.Ticket ticket = purchaseTicket(passengerName, phoneNumber, emailAddress, arrivalLocation, departureLocation);
+        Ticket ticket = purchaseTicket(passengerName, phoneNumber, emailAddress, arrivalLocation, departureLocation);
         printTicket(ticket);
         return ticket;
     }
 
     @Override
-    public TicketPrintingSystem.Ticket purchaseTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
+    public Ticket purchaseTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
                                                       String departureLocation) {
         lock.lock();
         try {
-            TicketPrintingSystem.Ticket ticket = new TicketPrintingSystem.Ticket(numberOfTicketsSold + 1, 1000,
+            Ticket ticket = new Ticket(numberOfTicketsSold + 1, 1000,
                     passengerName, phoneNumber, emailAddress, arrivalLocation, departureLocation);
             numberOfTicketsSold++;
             System.out.println("Ticket number: " + ticket.getTicketNumber().toString() + " purchased..");
@@ -58,7 +59,7 @@ public class TicketMachine implements ServiceTicketMachine {
     }
 
     @Override
-    public void printTicket(TicketPrintingSystem.Ticket ticket) {
+    public void printTicket(Ticket ticket) {
         lock.lock();
         try {
             while (!(currentPaperLevel > 0) || !(currentTonerLevel > ServiceTicketMachine.MINIMUM_TONER_LEVEL)) {

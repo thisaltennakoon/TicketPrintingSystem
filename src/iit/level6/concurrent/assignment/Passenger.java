@@ -28,7 +28,7 @@ public class Passenger implements Runnable {
 
 //        machine.purchasingTicket(this.ticket);
 //        machine.printTicket(this.ticket);
-        TicketPrintingSystem.Ticket ticket = machine.getTicket(this.passengerName, this.phoneNumber, this.emailAddress, this.arrivalLocation,
+        Ticket ticket = machine.getTicket(this.passengerName, this.phoneNumber, this.emailAddress, this.arrivalLocation,
                 this.departureLocation);
 //        System.out.println("Passenger " + this.ticket.getPassengerInfo().getPassengerName() + " got " + ticket);
         try {
