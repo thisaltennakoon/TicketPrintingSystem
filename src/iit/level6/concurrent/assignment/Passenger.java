@@ -25,23 +25,12 @@ public class Passenger implements Runnable {
 
     @Override
     public void run() {
-
-//        machine.purchasingTicket(this.ticket);
-//        machine.printTicket(this.ticket);
-        Ticket ticket = machine.getTicket(this.passengerName, this.phoneNumber, this.emailAddress, this.arrivalLocation,
+        machine.getTicket(this.passengerName, this.phoneNumber, this.emailAddress, this.arrivalLocation,
                 this.departureLocation);
-//        System.out.println("Passenger " + this.ticket.getPassengerInfo().getPassengerName() + " got " + ticket);
         try {
             Thread.sleep(random.nextInt(1000) + 1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-//        for(int i =0; i < TicketMachine.ticketPurchasedList.size(); i++){
-//            if(TicketMachine.ticketPurchasedList.get(i).equals(Thread.currentThread().getName())){
-//                machine.printTicket(this.ticket);
-//                System.out.println("Passenger " + this.ticket.getPassengerInfo().getPassengerName() + " got " + ticket);
-////                    Thread.sleep(random.nextInt(1000) + 1000);
-//            }
-//        }
     }
 }

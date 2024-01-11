@@ -1,26 +1,18 @@
 package iit.level6.concurrent.assignment;
 
-import java.util.ArrayList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-import iit.level6.concurrent.assignment.Ticket;
 
 public class TicketMachine implements ServiceTicketMachine {
 
     private String ticketMachineName;
-
     private int currentPaperLevel;
     private int currentTonerLevel;
-
     private int numberOfTicketsSold;
-
     public static int replaceTonerCartridgeCount = 0;
     public static int refillPaperPacksCount = 0;
 
-    public static ArrayList<String> ticketPurchasedList = new ArrayList<>();
-
     private final ReentrantLock lock = new ReentrantLock();
-
     private final Condition haveTonerLevel = lock.newCondition();
     private final Condition havePaperLevel = lock.newCondition();
     private final Condition noResource = lock.newCondition();
@@ -33,7 +25,7 @@ public class TicketMachine implements ServiceTicketMachine {
     }
 
     public Ticket getTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
-                                                 String departureLocation) {
+                            String departureLocation) {
         Ticket ticket = purchaseTicket(passengerName, phoneNumber, emailAddress, arrivalLocation, departureLocation);
         printTicket(ticket);
         return ticket;
@@ -41,13 +33,14 @@ public class TicketMachine implements ServiceTicketMachine {
 
     @Override
     public Ticket purchaseTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
-                                                      String departureLocation) {
+                                 String departureLocation) {
         lock.lock();
         try {
             Ticket ticket = new Ticket(numberOfTicketsSold + 1, 1000,
                     passengerName, phoneNumber, emailAddress, arrivalLocation, departureLocation);
             numberOfTicketsSold++;
-            System.out.println("Ticket number: " + ticket.getTicketNumber().toString() + " purchased..");
+            System.out.println("Ticket number: " + ticket.getTicketNumber().toString() + " purchased by " +
+                    Thread.currentThread().getName());
             havePaperLevel.signalAll();
             haveTonerLevel.signalAll();
             return ticket;
@@ -63,13 +56,14 @@ public class TicketMachine implements ServiceTicketMachine {
         lock.lock();
         try {
             while (!(currentPaperLevel > 0) || !(currentTonerLevel > ServiceTicketMachine.MINIMUM_TONER_LEVEL)) {
-                System.out.println("Passenger " + ticket.getPassengerName() + " waiting for " +
-                        "ticket machine " + ticketMachineName);
+                System.out.println("Passenger: " + ticket.getPassengerName() + " waiting for " +
+                        "ticket machine:" + ticketMachineName);
                 noResource.await();
             }
             currentPaperLevel--;
             currentTonerLevel--;
-            System.out.println("Ticket number: " + ticket.getTicketNumber().toString() + " printed..");
+            System.out.println("Ticket number: " + ticket.getTicketNumber().toString() + " printed by " +
+                    Thread.currentThread().getName());
             havePaperLevel.signalAll();
             haveTonerLevel.signalAll();
         } catch (InterruptedException e) {
@@ -78,7 +72,6 @@ public class TicketMachine implements ServiceTicketMachine {
             lock.unlock();
         }
     }
-
 
     @Override
     public void replaceTonerCartridge() {

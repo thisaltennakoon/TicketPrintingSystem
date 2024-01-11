@@ -7,12 +7,7 @@ public class TicketPrintingSystem {
 
     public static void main(String[] args) {
 
-//        Ticket ticket1 = new Ticket(1001,  1000, passengerInfo1, travelInfo1);
-//        Ticket ticket2 = new Ticket(1002,  2000, passengerInfo2, travelInfo2);
-//        Ticket ticket3 = new Ticket(1003,  3000, passengerInfo3, travelInfo3);
-//        Ticket ticket4 = new Ticket(1004,  4000, passengerInfo4, travelInfo4);
-
-        TicketMachine ticketMachine = new TicketMachine(" TicketMachine Name", 1, 2);
+        TicketMachine ticketMachine = new TicketMachine(" TicketMachine1", 1, 2);
 
         Passenger passenger1 = new Passenger(ticketMachine, "passenger1", "01122334455",
                 "passenger1@iit.com", "arrivalLocation1", "departureLocation1");
@@ -29,10 +24,10 @@ public class TicketPrintingSystem {
         ThreadGroup passengerThreadGroup = new ThreadGroup("PassengerThreadGroup");
         ThreadGroup technicianThreadGroup = new ThreadGroup("TechnicianThreadGroup");
 
-        Thread passengerThread1 = new Thread(passengerThreadGroup, passenger1, "PeterThread");
-        Thread passengerThread2 = new Thread(passengerThreadGroup, passenger2, "JohnThread");
-        Thread passengerThread3 = new Thread(passengerThreadGroup, passenger3, "MaryThread");
-        Thread passengerThread4 = new Thread(passengerThreadGroup, passenger4, "JaneThread");
+        Thread passengerThread1 = new Thread(passengerThreadGroup, passenger1, "passenger1Thread");
+        Thread passengerThread2 = new Thread(passengerThreadGroup, passenger2, "passenger2Thread");
+        Thread passengerThread3 = new Thread(passengerThreadGroup, passenger3, "passenger3Thread");
+        Thread passengerThread4 = new Thread(passengerThreadGroup, passenger4, "passenger4Thread");
 
         Thread tonerTechnicianThread = new Thread(technicianThreadGroup, ticketTonerTechnician, "Toner Technician");
         Thread paperTechnicianThread = new Thread(technicianThreadGroup, ticketPaperTechnician, "Paper Technician");
