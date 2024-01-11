@@ -1,0 +1,15 @@
+
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+nangi-concurency.iml
+out/production/nangi-concurency/iit/level6/concurrent/assignment/Machine.class
+out/production/nangi-concurency/iit/level6/concurrent/assignment/Passenger.class
+out/production/nangi-concurency/iit/level6/concurrent/assignment/PassengerInfo/PassengerInfo.class
+out/production/nangi-concurency/iit/level6/concurrent/assignment/ServiceTicketMachine.class
+out/production/nangi-concurency/iit/level6/concurrent/assignment/Technician/TicketPaperTechnician.class
+out/production/nangi-concurency/iit/level6/concurrent/assignment/Technician/TicketTonerTechnician.class
+out/production/nangi-concurency/iit/level6/concurrent/assignment/TicketInfo/Ticket.class
+out/production/nangi-concurency/iit/level6/concurrent/assignment/TicketMachine.class
+out/production/nangi-concurency/iit/level6/concurrent/assignment/TicketPrintingSystem.class
+out/production/nangi-concurency/iit/level6/concurrent/assignment/TravelInfo/TravelInfo.class
