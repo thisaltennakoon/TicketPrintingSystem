@@ -6,13 +6,13 @@ import java.util.Random;
 
 public class Passenger implements Runnable{
 
-    private final Machine machine;
+    private final TicketMachine machine;
 
     private final Ticket ticket;
 
     Random random = new Random();
 
-    public Passenger(Machine machine, Ticket ticket) {
+    public Passenger(TicketMachine machine, Ticket ticket) {
         this.machine = machine;
         this.ticket = ticket;
     }
