@@ -1,4 +1,4 @@
-package iit.level6.concurrent.assignment;
+package concurrent.assignment;
 
 import java.util.Random;
 

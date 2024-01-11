@@ -1,5 +1,6 @@
-package iit.level6.concurrent.assignment;
+package concurrent.assignment;
 
+import java.util.Random;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -28,6 +29,7 @@ public class TicketMachine implements ServiceTicketMachine {
                             String departureLocation) {
         Ticket ticket = purchaseTicket(passengerName, phoneNumber, emailAddress, arrivalLocation, departureLocation);
         printTicket(ticket);
+        System.out.println("Passenger " + ticket.getPassengerName() + " got " + ticket);
         return ticket;
     }
 
@@ -39,7 +41,7 @@ public class TicketMachine implements ServiceTicketMachine {
             Ticket ticket = new Ticket(numberOfTicketsSold + 1, 1000,
                     passengerName, phoneNumber, emailAddress, arrivalLocation, departureLocation);
             numberOfTicketsSold++;
-            System.out.println("Ticket number: " + ticket.getTicketNumber().toString() + " purchased by " +
+            System.out.println("Ticket number: " + ticket.getticketNumber().toString() + " purchased by " +
                     Thread.currentThread().getName());
             havePaperLevel.signalAll();
             haveTonerLevel.signalAll();
@@ -55,14 +57,15 @@ public class TicketMachine implements ServiceTicketMachine {
     public void printTicket(Ticket ticket) {
         lock.lock();
         try {
-            while (!(currentPaperLevel > 0) || !(currentTonerLevel > ServiceTicketMachine.MINIMUM_TONER_LEVEL)) {
+            Thread.sleep(new Random().nextInt(1000) + 1000);
+            while (!(currentPaperLevel > 0) || !(currentTonerLevel > ServiceTicketMachine.MIN_TONER_LEVEL)) {
                 System.out.println("Passenger: " + ticket.getPassengerName() + " waiting for " +
                         "ticket machine:" + ticketMachineName);
                 noResource.await();
             }
             currentPaperLevel--;
             currentTonerLevel--;
-            System.out.println("Ticket number: " + ticket.getTicketNumber().toString() + " printed by " +
+            System.out.println("Ticket number: " + ticket.getticketNumber().toString() + " printed by " +
                     Thread.currentThread().getName());
             havePaperLevel.signalAll();
             haveTonerLevel.signalAll();
@@ -77,59 +80,40 @@ public class TicketMachine implements ServiceTicketMachine {
     public void replaceTonerCartridge() {
         lock.lock();
         try {
-            while (currentTonerLevel >= ServiceTicketMachine.MINIMUM_TONER_LEVEL) {
-                System.out.println("Toner Technician waiting for refill ticket machine " + ticketMachineName);
+            while (currentTonerLevel >= ServiceTicketMachine.MIN_TONER_LEVEL) {
+                System.out.println("Current toner level is " + currentTonerLevel + " and toner refilling is not " +
+                        "needed for the ticket machine: " + ticketMachineName);
                 haveTonerLevel.await();
             }
-
-            currentTonerLevel = ServiceTicketMachine.FULL_TONER_LEVEL;
+            currentTonerLevel = ServiceTicketMachine.MAX_TONER_LEVEL;
             replaceTonerCartridgeCount++;
-            System.out.println("Toner Technician refilled the toner of ticket machine " + ticketMachineName);
+            System.out.println("Toner Technician refilled the toner of ticket machine: " + ticketMachineName);
             noResource.signalAll();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
             lock.unlock();
         }
-
-//        if(currentTonerLevel >= ServiceTicketMachine.MINIMUM_TONER_LEVEL){
-//            System.out.println("Current toner level is " + currentTonerLevel + " and is above minimum toner level");
-//        }else {
-//            currentTonerLevel = ServiceTicketMachine.FULL_TONER_LEVEL;
-//            replaceTonerCartridgeCount++;
-//            System.out.println("Toner Technician refilled the toner of ticket machine " + ticketMachineName);
-//        }
-
     }
 
     @Override
     public void refillTicketPaper() {
         lock.lock();
-
         try {
-
             while ((currentPaperLevel + ServiceTicketMachine.SHEETS_PER_PACK) > ServiceTicketMachine.FULL_PAPER_TRAY) {
-                System.out.println("Paper Technician waiting for refill ticket machine " + ticketMachineName);
+                System.out.println("Machine has enugh papaer and the paper technician is waiting to refill ticket " +
+                        "machine " + ticketMachineName);
                 havePaperLevel.await();
             }
-
             currentPaperLevel += ServiceTicketMachine.SHEETS_PER_PACK;
             refillPaperPacksCount++;
-            System.out.println("Paper Technician refilled the paper of ticket machine " + ticketMachineName);
+            System.out.println("Paper Technician refilled the paper of ticket machine: " + ticketMachineName);
             noResource.signalAll();
-
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
             lock.unlock();
         }
-//        if((currentPaperLevel + ServiceTicketMachine.SHEETS_PER_PACK) > ServiceTicketMachine.FULL_PAPER_TRAY) {
-//            System.out.println("Ticket machine " + ticketMachineName + " is full");
-//        }else {
-//            currentPaperLevel += ServiceTicketMachine.SHEETS_PER_PACK;
-//            refillPaperPacksCount++;
-//            System.out.println("Ticket machine " + ticketMachineName + " refilled");
-//        }
     }
 
     @Override

@@ -1,17 +1,16 @@
-package iit.level6.concurrent.assignment;
+package concurrent.assignment;
 
 public interface ServiceTicketMachine {
 
     int FULL_PAPER_TRAY = 20;
     int SHEETS_PER_PACK = 5;
-
-    int FULL_TONER_LEVEL = 15;
-    int MINIMUM_TONER_LEVEL = 10;
+    int MAX_TONER_LEVEL = 15;
+    int MIN_TONER_LEVEL = 10;
 
     void printTicket(Ticket ticket);
 
     Ticket purchaseTicket(String passengerName, String phoneNumber, String emailAddress, String arrivalLocation,
-                                               String departureLocation);
+                          String departureLocation);
 
     void replaceTonerCartridge();
 

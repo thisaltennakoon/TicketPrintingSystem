@@ -1,7 +1,7 @@
-package iit.level6.concurrent.assignment;
+package concurrent.assignment;
 
-import iit.level6.concurrent.assignment.Technician.TicketPaperTechnician;
-import iit.level6.concurrent.assignment.Technician.TicketTonerTechnician;
+import concurrent.assignment.Technician.TicketPaperTechnician;
+import concurrent.assignment.Technician.TicketTonerTechnician;
 
 public class TicketPrintingSystem {
 
@@ -45,15 +45,9 @@ public class TicketPrintingSystem {
         while (technicianThreadGroup.activeCount() > 0 || passengerThreadGroup.activeCount() > 0) {
             if (passengerThreadGroup.activeCount() == 0) {
                 technicianThreadGroup.interrupt();
-                System.out.println("All passengers have finished printing and stop technicians");
+                System.out.println("All passengers and technicians have finished..");
                 break;
             }
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
         }
-
     }
 }

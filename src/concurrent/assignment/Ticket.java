@@ -1,4 +1,4 @@
-package iit.level6.concurrent.assignment;
+package concurrent.assignment;
 
 public class Ticket {
 
@@ -10,9 +10,9 @@ public class Ticket {
     private final String arrivalLocation;
     private final String departureLocation;
 
-    public Ticket(int ticketNUmber, float ticketPrice, String passengerName, String phoneNumber, String emailAddress,
+    public Ticket(int ticketNumber, float ticketPrice, String passengerName, String phoneNumber, String emailAddress,
                   String arrivalLocation, String departureLocation) {
-        this.ticketNumber = ticketNUmber;
+        this.ticketNumber = ticketNumber;
         this.ticketPrice = ticketPrice;
         this.passengerName = passengerName;
         this.phoneNumber = phoneNumber;
@@ -21,7 +21,7 @@ public class Ticket {
         this.departureLocation = departureLocation;
     }
 
-    public Integer getTicketNumber() {
+    public Integer getticketNumber() {
         return ticketNumber;
     }
 
@@ -60,7 +60,7 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket{" +
-                "ticketNUmber=" + ticketNumber +
+                "ticketNumber=" + ticketNumber +
                 ", ticketPrice=" + ticketPrice +
                 ", passengerName='" + passengerName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
